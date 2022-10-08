@@ -4,10 +4,12 @@ import 'vite/modulepreload-polyfill'
 import {createGlobalStyle, ThemeProvider} from 'styled-components'
 import Container from './components/Container'
 
+// Setting themes
+
 const themes = [{
     name: 'dark',
     pickedFilter: 'hsl(220, 98%, 61%)',
-    checkBackground: 'linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%)',
+    checkBackground: 'linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%))',
     mainBackground: 'hsl(235, 21%, 11%)',
     containerBackground: 'hsl(235, 24%, 19%)',
     todoUndone: 'white',
@@ -18,15 +20,17 @@ const themes = [{
   {
     name: 'light',
     pickedFilter: 'hsl(220, 98%, 61%)',
-    checkBackground: 'linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%)',
+    checkBackground: 'linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%))',
     mainBackground: 'hsl(0, 0%, 98%)',
     containerBackground: 'white',
-    todoUndone: 'hsl(236, 33%, 92%)',
-    todoDone: 'hsl(235, 19%, 35%)',
+    todoUndone: 'hsl(235, 19%, 35%)',
+    todoDone: 'hsl(236, 33%, 92%)',
     functions: 'hsl(233, 11%, 84%)',
     filters: 'hsl(236, 9%, 61%)'
   }
 ]
+
+// Global styling
 
 const GlobalStyle = createGlobalStyle`
 
@@ -34,13 +38,13 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Josefin Sans', sans-serif;
   }
   html, body, #root {
     width: 100%;
     height: 100%;
   }
   body {
-    font-family: 'Josefin Sans', sans-serif;
     font-size: 18px;
     font-weight: 400;
     > #root {
@@ -79,6 +83,8 @@ const GlobalStyle = createGlobalStyle`
 
 `
 
+// App
+
 function App() {
 
   const [theme, setTheme] = useState(0)
@@ -88,7 +94,10 @@ function App() {
       <GlobalStyle />
       <div></div>
       <div></div>
-      <Container />
+      <Container 
+        theme={theme}
+        setTheme={setTheme}
+      />
     </ThemeProvider>
   )
 }
