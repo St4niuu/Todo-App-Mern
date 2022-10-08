@@ -13,7 +13,9 @@ const themes = [{
     mainBackground: 'hsl(235, 21%, 11%)',
     containerBackground: 'hsl(235, 24%, 19%)',
     todoUndone: 'white',
+    inputColor: 'white',
     todoDone: 'hsl(233, 14%, 35%)',
+    labelBorder: 'hsl(233, 14%, 35%)',
     functions: 'hsl(234, 11%, 52%)',
     filters: 'hsl(234, 39%, 85%)',
   },
@@ -24,7 +26,9 @@ const themes = [{
     mainBackground: 'hsl(0, 0%, 98%)',
     containerBackground: 'white',
     todoUndone: 'hsl(235, 19%, 35%)',
+    inputColor: 'hsl(235, 19%, 35%)',
     todoDone: 'hsl(236, 33%, 92%)',
+    labelBorder: 'hsl(236, 33%, 92%)',
     functions: 'hsl(233, 11%, 84%)',
     filters: 'hsl(236, 9%, 61%)'
   }
