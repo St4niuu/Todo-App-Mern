@@ -18,6 +18,7 @@ const themes = [{
     labelBorder: 'hsl(233, 14%, 35%)',
     functions: 'hsl(234, 11%, 52%)',
     filters: 'hsl(234, 39%, 85%)',
+    notice: 'hsl(233, 14%, 35%)'
   },
   {
     name: 'light',
@@ -30,7 +31,8 @@ const themes = [{
     todoDone: 'hsl(236, 33%, 92%)',
     labelBorder: 'hsl(236, 33%, 92%)',
     functions: 'hsl(233, 11%, 84%)',
-    filters: 'hsl(236, 9%, 61%)'
+    filters: 'hsl(236, 9%, 61%)',
+    notice: 'hsl(233, 11%, 84%)'
   }
 ]
 
