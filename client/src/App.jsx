@@ -15,6 +15,7 @@ const themes = [{
     todoUndone: 'white',
     inputColor: 'white',
     todoDone: 'hsl(233, 14%, 35%)',
+    todoLine: 'hsl(233, 14%, 35%)',
     labelBorder: 'hsl(233, 14%, 35%)',
     functions: 'hsl(234, 11%, 52%)',
     filters: 'hsl(234, 39%, 85%)',
@@ -29,6 +30,7 @@ const themes = [{
     todoUndone: 'hsl(235, 19%, 35%)',
     inputColor: 'hsl(235, 19%, 35%)',
     todoDone: 'hsl(236, 33%, 92%)',
+    todoLine: 'hsl(236, 33%, 92%)',
     labelBorder: 'hsl(236, 33%, 92%)',
     functions: 'hsl(233, 11%, 84%)',
     filters: 'hsl(236, 9%, 61%)',
@@ -85,6 +87,14 @@ const GlobalStyle = createGlobalStyle`
         background-color: ${props => {return props.theme.mainBackground}};
       }
     }
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 5px;
   }
 
 `

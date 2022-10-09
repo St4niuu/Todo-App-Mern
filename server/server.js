@@ -22,6 +22,21 @@ app.post('/api/add-todo', async (req, res) => {
     res.status(200).send('Added')
 })
 
+app.put('/api/modify-todo', async (req, res) => {
+    await database.collection('todos').updateOne({id: req.body.id}, { $set: {isDone: req.body.isDone}})
+    res.status(200).send('Modified')
+})
+
+app.delete('/api/delete-todo', async (req, res) => {
+    await database.collection('todos').deleteOne({id: req.headers.id})
+    res.status(200).send('Deleted')
+})
+
+app.delete('/api/clear-todo', async (req, res) => {
+    await database.collection('todos').deleteMany({isDone: true})
+    res.status(200).send('Cleared')
+})
+
 async function setConnection() {
     const connection = new MongoClient('mongodb+srv://user:user@todo-app.nxl8su2.mongodb.net/')
     await connection.connect()
