@@ -1,7 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react'
-import styled, {useTheme, css} from 'styled-components'
+import styled, {useTheme} from 'styled-components'
 import handleKeyPress from '../hooks/handleKeyPress'
 import LabelStyling from '../css/LabelStyling'
+import FiltersStyling from '../css/FiltersStyling'
 import {v4} from 'uuid'
 import axios from 'axios'
 
@@ -60,7 +61,7 @@ const StyledContainer = styled.div`
       color: ${props => {return props.theme.inputColor}};
       caret-color: grey;
     }
-    ${LabelStyling}
+    ${() => {return LabelStyling}}
   }
   > .content {
     width: 100%;
@@ -70,16 +71,19 @@ const StyledContainer = styled.div`
     display: flex;
     flex-direction: column;
     background-color: ${props => {return props.theme.containerBackground}};
+    box-shadow: 0 1px 12px 0 black;
   }
   > .filters-phone {
     width: 100%;
     height: 10%;
     border-radius: 5px;
     padding: 1rem;
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
     background-color: ${props => {return props.theme.containerBackground}};
+    box-shadow: 0 1px 12px 0 black;
+    ${() => {return FiltersStyling}}
+    @media (min-width: 420px) {
+      display: none;
+    }
   }
   > .notice {
     width: 100%;
@@ -122,6 +126,31 @@ function Container(props) {
       getTodos()
     }, [])
 
+    // Filters
+
+    const [filter, setFilter] = useState(1)
+    const [todosToView, setTodosToView] = useState([])
+
+    useEffect(() => {
+      const setContent = async () => {
+        await setTodosToView(todos)
+      }
+      setContent()
+    }, [todos])
+
+    useEffect(() => {
+      const setContent = async () => {
+        switch(filter) {
+          case 1:
+            return await setTodosToView(todos)
+          case 2:
+            return await setTodosToView(todos.filter(item => {return item.isDone === false}))
+          case 3:
+            return await setTodosToView(todos.filter(item => {return item.isDone === true}))
+        }
+      }
+    }, [filter])
+
     // Maintaining user ID
 
     useEffect(() => {
@@ -144,12 +173,12 @@ function Container(props) {
 
     handleKeyPress(addTodo, 'Enter')
 
-  // Additional properties
+  // Fetching the theme
 
   const theme = useTheme()
 
   return (
-    <StyledContainer>
+    <StyledContainer filter={filter}>
       <div className='heading'>
         <h2>TODO</h2>
         <img src={theme.name === 'dark' ? '/icon-sun.svg' : '/icon-moon.svg'} alt='theme-icon' onClick={() => themeChange(props.theme, props.setTheme)} 
@@ -164,7 +193,9 @@ function Container(props) {
 
       </div>
       <div className='filters-phone'>
-
+        <span onClick={() => {setFilter(1)}}>All</span>
+        <span onClick={() => {setFilter(2)}}>Active</span>
+        <span onClick={() => {setFilter(3)}}>Completed</span>
       </div>
       <div className='notice'>
         Drag and drop to reorder the list
