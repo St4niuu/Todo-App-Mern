@@ -71,7 +71,7 @@ const GlobalStyle = createGlobalStyle`
               case 'light': return `url('/bg-mobile-light.jpg');`
             } 
           }}
-        @media (min-width: 420px) {
+        @media (min-width: 480px) {
           background-image: 
             ${props => {
               switch(props.theme.name) {

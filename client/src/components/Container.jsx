@@ -25,7 +25,7 @@ const StyledContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
   padding: 1rem 0rem;
-  @media (min-width: 420px) {
+  @media (min-width: 480px) {
     min-width: 25rem;
     max-width: 35rem;
     min-height: 45rem;
@@ -93,7 +93,7 @@ const StyledContainer = styled.div`
       > .functions-filters-desktop {
         ${() => {return FiltersStyling}}
         display: none;
-        @media (min-width: 420px) {
+        @media (min-width: 480px) {
           display: flex;
         }
       }
@@ -110,7 +110,7 @@ const StyledContainer = styled.div`
     background-color: ${props => {return props.theme.containerBackground}};
     box-shadow: 0 1px 12px 0 black;
     ${() => {return FiltersStyling}}
-    @media (min-width: 420px) {
+    @media (min-width: 480px) {
       display: none;
     }
   }

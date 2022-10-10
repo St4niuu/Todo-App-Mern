@@ -33,11 +33,11 @@ const StyledTodo = styled.div`
   }
   > img {
     cursor: pointer;
-    @media (min-width: 420px) {
+    @media (min-width: 480px) {
       display: none;
     }
   }
-  @media (min-width: 420px) {
+  @media (min-width: 480px) {
     &:hover > img {
       display: block;
     }
