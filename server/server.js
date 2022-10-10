@@ -33,8 +33,14 @@ app.delete('/api/delete-todo', async (req, res) => {
 })
 
 app.delete('/api/clear-todo', async (req, res) => {
-    await database.collection('todos').deleteMany({isDone: true})
+    await database.collection('todos').deleteMany({userID: req.headers.userid, isDone: true})
     res.status(200).send('Cleared')
+})
+
+app.post('/api/drag-todo', async (req, res) => {
+    await database.collection('todos').deleteMany({userID: req.headers.userid})
+    await database.collection('todos').insertMany(req.body)
+    res.status(200).send('Updated')
 })
 
 async function setConnection() {

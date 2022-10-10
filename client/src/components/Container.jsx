@@ -229,10 +229,43 @@ function Container(props) {
 
     // Clearing done 
     async function clearTodo() {
-      await axios.delete('/api/clear-todo')
+      await axios.delete('/api/clear-todo', {headers: {userID: window.localStorage.getItem('USER_ID')}})
       await setTodos(prev => {
         return prev.filter(item => {return item.isDone === false})
       })
+    }
+
+  // Handle dragging
+
+    let firstDraggingItem;
+    let secondDraggingItem;
+
+    function handleOnDragStart(id)  {
+      return firstDraggingItem = id
+    }
+
+    function handleOnDragOver(e) {
+      e.preventDefault()
+    }
+
+    async function handleOnDrop(id) {
+      secondDraggingItem = id
+      const firstItemIndex = todos.findIndex(item => {return item.id === firstDraggingItem})
+      const secondItemIndex = todos.findIndex(item => {return item.id === secondDraggingItem})
+      const firstItem = todos[firstItemIndex]
+      const secondItem = todos[secondItemIndex]
+      const todosToSet = todos.map((item, index) => {
+        switch(index) {
+          case firstItemIndex:
+            return secondItem
+          case secondItemIndex:
+            return firstItem
+          default:
+            return item
+        }
+      })
+      setTodos(todosToSet)
+      await axios.post('/api/drag-todo', todosToSet.map(item => {return {id: item.id, userID: item.userID, content: item.content, isDone: item.isDone}}), {headers: {userID: window.localStorage.getItem('USER_ID')}})
     }
 
   // Fetching the theme
@@ -253,7 +286,18 @@ function Container(props) {
       </div>
       <div className='content'>
         <div className='todos'>
-          {todosToView.map(item => {return <Todo key={item.id} id={item.id} content={item.content} isDone={item.isDone} modifyTodo={modifyTodo} deleteTodo={deleteTodo} />})}
+          {todosToView.map(item => {
+            return <Todo 
+              key={item.id}
+              id={item.id}
+              content={item.content}
+              isDone={item.isDone}
+              modifyTodo={modifyTodo}
+              deleteTodo={deleteTodo}
+              handleOnDragStart={handleOnDragStart}
+              handleOnDragOver={handleOnDragOver}
+              handleOnDrop={handleOnDrop}
+            />})}
         </div>
         <div className='functions'>
           <div className='functions-left'>

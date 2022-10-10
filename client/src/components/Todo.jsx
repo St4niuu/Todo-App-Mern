@@ -56,7 +56,13 @@ const StyledTodo = styled.div`
 
 function Todo(props) {
   return (
-    <StyledTodo isDone={props.isDone}>
+    <StyledTodo 
+      isDone={props.isDone}
+      draggable={true}
+      onDragStart={() => {props.handleOnDragStart(props.id)}}
+      onDragOver={(e) => {props.handleOnDragOver(e)}}
+      onDrop={() => {props.handleOnDrop(props.id)}}
+    >
       <div className='todo-content'>
         <input type='checkbox' id={props.id} checked={props.isDone} onChange={() => {props.modifyTodo(props.id)}} />
         <label htmlFor={props.id}></label>
